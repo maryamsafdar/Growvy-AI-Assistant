@@ -43,6 +43,7 @@ if PINECONE_INDEX_NAME not in [index.name for index in pinecone_client.list_inde
         spec=ServerlessSpec(cloud="aws", region=PINECONE_API_ENVIRONMENT)
     )
 
+
 index = pinecone_client.Index(PINECONE_INDEX_NAME)
 
 # Embeddings

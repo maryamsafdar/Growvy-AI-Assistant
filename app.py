@@ -14,6 +14,9 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter #type: ignore
 from langchain.schema import Document #type: ignore
 from pinecone import Pinecone, ServerlessSpec #type: ignore
 from pydantic import SecretStr #type: ignore
+from langchain.globals import set_verbose
+
+set_verbose(True)
 
 
 # Streamlit Page Config

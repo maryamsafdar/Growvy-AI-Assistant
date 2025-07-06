@@ -1,26 +1,28 @@
-import os
-import streamlit as st #type: ignore
-import logging #type: ignore
+
+import streamlit as st
+# Streamlit Page Config
+st.set_page_config(page_title="Growvy Chatbot", page_icon="🤖", layout="centered")
+import os 
+import logging 
 from dotenv import load_dotenv
 from config import OPENAI_API_KEY, PINECONE_API_KEY, PINECONE_API_ENVIRONMENT, PINECONE_INDEX_NAME
-from langchain_openai import ChatOpenAI     #type: ignore
-from langchain_core.vectorstores import VectorStore #type: ignore
-from langchain_pinecone import PineconeVectorStore  #type: ignore
-from langchain_community.embeddings import OpenAIEmbeddings     #type: ignore
-from langchain.chains import create_retrieval_chain #type: ignore
-from langchain.chains.combine_documents import create_stuff_documents_chain #type: ignore
-from langchain.prompts import PromptTemplate    #type: ignore
-from langchain.text_splitter import RecursiveCharacterTextSplitter #type: ignore
-from langchain.schema import Document #type: ignore
-from pinecone import Pinecone, ServerlessSpec #type: ignore
-from pydantic import SecretStr #type: ignore
+from langchain_openai import ChatOpenAI    
+from langchain_core.vectorstores import VectorStore 
+from langchain_pinecone import PineconeVectorStore 
+from langchain_community.embeddings import OpenAIEmbeddings    
+from langchain.chains import create_retrieval_chain 
+from langchain.chains.combine_documents import create_stuff_documents_chain 
+from langchain.prompts import PromptTemplate    
+from langchain.text_splitter import RecursiveCharacterTextSplitter 
+from langchain.schema import Document 
+from pinecone import Pinecone, ServerlessSpec 
+from pydantic import SecretStr
 from langchain.globals import set_verbose
 
 set_verbose(True)
 
 
-# Streamlit Page Config
-st.set_page_config(page_title="Growvy Chatbot", page_icon="🤖", layout="centered")
+
 
 # Load env
 load_dotenv()
@@ -30,8 +32,6 @@ os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
-PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME", "growvy-index")
-print("Index name:", PINECONE_INDEX_NAME)  # Just for debugging
 
 # Pinecone setup
 pinecone_client = Pinecone(api_key=PINECONE_API_KEY)
@@ -42,7 +42,6 @@ if PINECONE_INDEX_NAME not in [index.name for index in pinecone_client.list_inde
         metric='cosine',
         spec=ServerlessSpec(cloud="aws", region=PINECONE_API_ENVIRONMENT)
     )
-
 
 index = pinecone_client.Index(PINECONE_INDEX_NAME)
 

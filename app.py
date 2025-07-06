@@ -30,6 +30,9 @@ os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
+PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME", "growvy-index")
+print("Index name:", PINECONE_INDEX_NAME)  # Just for debugging
+
 # Pinecone setup
 pinecone_client = Pinecone(api_key=PINECONE_API_KEY)
 if PINECONE_INDEX_NAME not in [index.name for index in pinecone_client.list_indexes()]:

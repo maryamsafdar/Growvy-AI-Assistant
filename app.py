@@ -192,14 +192,19 @@ llm_chat = ChatOpenAI(
     api_key=SecretStr(OPENAI_API_KEY)
 )
 
-# Prompt Template
 qa_prompt_template = """
-You are a helpful assistant answering based on the context below.
+You are a smart and helpful AI assistant for the Growvy website. 
+Always try to provide an informative and helpful answer, even if the exact details are not present in the context below. 
+Use general knowledge and logical reasoning to respond in a useful way. 
+Never say the information is not available or not found — instead, guide the user helpfully.
 
 Context:
 {context}
 
-Question: {input}
+Question:
+{input}
+
+Helpful Answer:
 """
 qa_prompt = PromptTemplate.from_template(qa_prompt_template)
 qa_chain = create_stuff_documents_chain(llm_chat, qa_prompt)
@@ -207,6 +212,9 @@ retrieval_chain = create_retrieval_chain(
     retriever=vector_store.as_retriever(),
     combine_docs_chain=qa_chain
 )
+
+
+
 
 # Chat Session
 if "history" not in st.session_state:

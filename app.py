@@ -203,13 +203,13 @@ def get_base64_image(image_path):
 # Convert your PNG to base64
 image_base64 = get_base64_image("growvy_logo.png")
 # Display Growvy logo + assistant title
-# st.markdown(f"""
-#         <div style='text-align: center;'>
-#             <img src='data:image/png;base64,{image_base64}' width='100' style='margin-bottom: 10px;' />
-#             <h2 style='margin: 0; font-size: 24px; color: #2E7D32;'>Growvy AI Assistant</h2>
-#             <p style='color: #555; font-size: 14px;'>Ask anything about Growvy's services, features, jobs, or pricing.</p>
-#         </div>
-#     """, unsafe_allow_html=True)
+st.markdown(f"""
+        <div style='text-align: center;'>
+            <img src='data:image/png;base64,{image_base64}' width='100' style='margin-bottom: 10px;' />
+            <h2 style='margin: 0; font-size: 24px; color: #2E7D32;'>Growvy AI Assistant</h2>
+            <p style='color: #555; font-size: 14px;'>Ask anything about Growvy's services, features, jobs, or pricing.</p>
+        </div>
+    """, unsafe_allow_html=True)
 
 qa_prompt_template = """
 You are a smart and helpful AI assistant for the Growvy website. 

@@ -192,6 +192,25 @@ llm_chat = ChatOpenAI(
     api_key=SecretStr(OPENAI_API_KEY)
 )
 
+import base64
+
+# Load image and encode to base64
+def get_base64_image(image_path):
+    with open(image_path, "rb") as image_file:
+        encoded = base64.b64encode(image_file.read()).decode()
+    return encoded
+
+# Convert your PNG to base64
+image_base64 = get_base64_image("growvy_logo.png")
+# Display Growvy logo + assistant title
+# st.markdown(f"""
+#         <div style='text-align: center;'>
+#             <img src='data:image/png;base64,{image_base64}' width='100' style='margin-bottom: 10px;' />
+#             <h2 style='margin: 0; font-size: 24px; color: #2E7D32;'>Growvy AI Assistant</h2>
+#             <p style='color: #555; font-size: 14px;'>Ask anything about Growvy's services, features, jobs, or pricing.</p>
+#         </div>
+#     """, unsafe_allow_html=True)
+
 qa_prompt_template = """
 You are a smart and helpful AI assistant for the Growvy website. 
 Always try to provide an informative and helpful answer, even if the exact details are not present in the context below. 
